@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'page/calendarpage.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -152,6 +154,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 // ...
                 // Then close the drawer
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('달력'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => NewPage("독서 캘린더")));
               },
             ),
             ListTile(

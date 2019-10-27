@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalendar/kalendar.dart';
 
 class NewPage extends StatelessWidget {
   final String title;
@@ -12,9 +13,9 @@ class NewPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text('new page'),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 4),
+        child: Kalendar(),
       ),
     );
   }
