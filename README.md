@@ -1,16 +1,17 @@
-# hope_your_real_victory
+# What I want to make
 
-A new Flutter project.
+I am learning Flutter. I am interested in growth and recovery in life.
+I will make book diary application.
 
-## Getting Started
+I am very very slow so i used to forget where i am going. 
+'I did nothing.' discourages me and wate time.
 
-This project is a starting point for a Flutter application.
+So I need 
+Recording what i did for avoiding the situation.
+Showing progress of my goal reminding me endpoint is existing.
 
-A few resources to get you started if this is your first Flutter project:
+I hope, I can finish this project.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Growth with delight and healthy.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
