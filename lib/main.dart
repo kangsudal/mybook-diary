@@ -28,10 +28,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  List<dynamic> myShelves = [];
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  void _addShelf(String newShelf){
+    setState((){
+      myShelves.add(newShelf);
     });
   }
 
@@ -141,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: () async {
           final String newShelf = await _asyncInputDialog(context);
           print("New shelf name is $newShelf");
+          _addShelf(newShelf);
         },
       ),
       Container(
@@ -157,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   // color: Colors.blue,
                   child: listItem(index));
             },
-            itemCount: 10,
+            itemCount: myShelves.length,
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
           ),
@@ -188,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget listItem(int index) {
     return ListTile(
-      title: Text('기본 책장$index'),
+      title: Text('기본 책장$index ${myShelves[index]}'),
       onTap: () {
         // Update the state of the app
         // ...
