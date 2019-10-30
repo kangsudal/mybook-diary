@@ -146,16 +146,21 @@ class _MyHomePageState extends State<MyHomePage> {
       Container(
         // decoration: BoxDecoration(border: Border.all()),
         color: Colors.blue,
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return Container(
-                decoration: BoxDecoration(border: Border.all()),
-                // color: Colors.blue,
-                child: listItem(index));
-          },
-          itemCount: 10,
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: ListView.builder(
+            // padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              return Container(
+                  decoration: BoxDecoration(border: Border.all()),
+                  // color: Colors.blue,
+                  child: listItem(index));
+            },
+            itemCount: 10,
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+          ),
         ),
       ),
       ListTile(
