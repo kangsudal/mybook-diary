@@ -28,17 +28,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  List<dynamic> myShelves = [];
+
+  List<dynamic> myShelves = ['기본책장'];
   PageController _pageController = PageController(
     initialPage: 0,
   );
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+
 
   void _addShelf(String newShelf) {
     setState(() {
@@ -87,34 +83,20 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: PageView(
+      body: PageView.builder(
         controller: _pageController,
-        children: <Widget>[
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-              ],
-            ),
-          ),
-          ShelfDetailPage('p1'),
-          Text('p2'),
-          Text('p3'),
-          CalendarPage('title'),
-        ],
+        itemBuilder: (BuildContext context, int position){
+          int tempBook = position; 
+          //tempBook 임시값 바꿔줘야함
+          return ShelfDetailPage(myShelves[position],tempBook);//_pageBuilder();
+        },
+        itemCount: myShelves.length,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,

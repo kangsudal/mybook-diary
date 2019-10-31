@@ -3,18 +3,29 @@ import 'package:flutter/material.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
 class ShelfDetailPage extends StatefulWidget {
-  final String title;
+  final String bookShelfName;
+  final int books;
 
-  ShelfDetailPage(this.title);
+  ShelfDetailPage(this.bookShelfName,this.books);
 
   @override
   _ShelfDetailPageState createState() => _ShelfDetailPageState();
 }
 
 class _ShelfDetailPageState extends State<ShelfDetailPage> {
+  int _bookCounter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _bookCounter++;
+    });
+    print(_bookCounter);
+  }
+
   @override
   void initState() {
     super.initState();
+    _bookCounter = widget.books;
   }
 
   @override
@@ -25,32 +36,30 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   Widget build(BuildContext context) {
     // UI를 그리기 위해 Todo를 사용합니다.
-    return ListView(
-      children: <Widget>[
-        Text('${widget.title}'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data2'),
-        Text('data3'),
-        Text('data4'),
-        Text('data5')
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.bookShelfName),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_bookCounter',
+              style: Theme.of(context).textTheme.display1,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
