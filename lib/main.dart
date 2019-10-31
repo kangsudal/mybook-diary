@@ -29,6 +29,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   List<dynamic> myShelves = [];
+  PageController _pageController = PageController(
+    initialPage: 0,
+  );
 
   void _incrementCounter() {
     setState(() {
@@ -36,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _addShelf(String newShelf){
-    setState((){
+  void _addShelf(String newShelf) {
+    setState(() {
       myShelves.add(newShelf);
     });
   }
@@ -83,19 +86,28 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: PageView(
+        controller: _pageController,
+        children: <Widget>[
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'You have pushed the button this many times:',
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.display1,
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+          ),
+          Text('p1'),
+          Text('p2'),
+          Text('p3'),
+          NewPage('title'),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -152,8 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       Container(
-        // decoration: BoxDecoration(border: Border.all()),
-        color: Colors.blue,
+        decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+        // color: Colors.blue,
         child: MediaQuery.removePadding(
           context: context,
           removeTop: true,
@@ -161,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
               return Container(
-                  decoration: BoxDecoration(border: Border.all()),
+                  // decoration: BoxDecoration(border: Border.all()),
                   // color: Colors.blue,
                   child: listItem(index));
             },
@@ -196,10 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget listItem(int index) {
     return ListTile(
-      title: Text('기본 책장$index ${myShelves[index]}'),
+      title: Text('${myShelves[index]}'),
       onTap: () {
         // Update the state of the app
-        // ...
+        _pageController.jumpToPage(index);
         // Then close the drawer
         Navigator.pop(context);
       },

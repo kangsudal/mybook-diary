@@ -38,7 +38,7 @@ class _NewPageState extends State<NewPage> {
           TableCalendar(
             calendarController: _calendarController,
             startingDayOfWeek: StartingDayOfWeek.saturday,
-            rowHeight: 100,
+            // rowHeight: 100,
             builders: CalendarBuilders(
               selectedDayBuilder: (context,date,events)=>
               Container(
