@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hope_your_real_victory/page/shelfdetailpage.dart';
 
 import 'page/calendarpage.dart';
 
@@ -103,10 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          Text('p1'),
+          ShelfDetailPage('p1'),
           Text('p2'),
           Text('p3'),
-          NewPage('title'),
+          CalendarPage('title'),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -152,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // Then close the drawer
           Navigator.pop(context);
           // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (BuildContext context) => NewPage("Page two")));
+          //     builder: (BuildContext context) => CalendarPage("Page two")));
         },
       ),
       ListTile(
@@ -191,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // Then close the drawer
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => NewPage("독서 캘린더")));
+              builder: (BuildContext context) => CalendarPage("독서 캘린더")));
         },
       ),
       ListTile(

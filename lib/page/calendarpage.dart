@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 // import 'package:kalendar/kalendar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class NewPage extends StatefulWidget {
+class CalendarPage extends StatefulWidget {
   final String title;
 
-  NewPage(this.title);
+  CalendarPage(this.title);
 
   @override
-  _NewPageState createState() => _NewPageState();
+  _CalendarPageState createState() => _CalendarPageState();
 }
 
-class _NewPageState extends State<NewPage> {
+class _CalendarPageState extends State<CalendarPage> {
   CalendarController _calendarController;
 
   @override
@@ -87,3 +87,5 @@ class _NewPageState extends State<NewPage> {
     );
   }
 }
+
+
