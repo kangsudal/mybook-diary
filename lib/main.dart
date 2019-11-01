@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<dynamic> myShelves = ['기본책장'];
+  List<dynamic> myShelves = ['책장 모아보기'];
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -120,23 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(fontSize: 40.0),
           ),
         ),
-      ),
-      // DrawerHeader(
-      //   child: Text('Drawer Header'),
-      //   decoration: BoxDecoration(
-      //     color: Colors.blue,
-      //   ),
-      // ),
-      ListTile(
-        title: Text('책장 모아보기'),
-        onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (BuildContext context) => CalendarPage("Page two")));
-        },
       ),
       ListTile(
         title: Text('책장 추가'),
