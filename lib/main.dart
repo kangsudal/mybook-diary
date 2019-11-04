@@ -28,13 +28,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  List<dynamic> myShelves = ['기본책장'];
+  List<dynamic> myShelves = ['책장 모아 보기'];
   PageController _pageController = PageController(
     initialPage: 0,
   );
-
-
 
   void _addShelf(String newShelf) {
     setState(() {
@@ -85,10 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: PageView.builder(
         controller: _pageController,
-        itemBuilder: (BuildContext context, int position){
-          int tempBook = position; 
+        itemBuilder: (BuildContext context, int position) {
+          int tempBook = position;
           //tempBook 임시값 바꿔줘야함
-          return ShelfDetailPage(myShelves[position],tempBook);//_pageBuilder();
+          return ShelfDetailPage(
+              myShelves[position], tempBook); //_pageBuilder();
         },
         itemCount: myShelves.length,
       ),
@@ -100,93 +98,84 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: _buildList(),
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("User name"),
+              accountEmail: Text("email@email.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor:
+                    Theme.of(context).platform == TargetPlatform.iOS
+                        ? Colors.blue
+                        : Colors.white,
+                child: Text(
+                  "A",
+                  style: TextStyle(fontSize: 40.0),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('책장 모아보기'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (BuildContext context) => CalendarPage("Page two")));
+              },
+            ),
+            ListTile(
+              title: Text('책장 추가'),
+              onTap: () async {
+                final String newShelf = await _asyncInputDialog(context);
+                print("New shelf name is $newShelf");
+                _addShelf(newShelf);
+              },
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+              // color: Colors.blue,
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: ListView.builder(
+                  // padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        // decoration: BoxDecoration(border: Border.all()),
+                        // color: Colors.blue,
+                        child: listItem(index));
+                  },
+                  itemCount: myShelves.length,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('달력'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => CalendarPage("독서 캘린더")));
+              },
+            ),
+            ListTile(
+              title: Text('설정'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  _buildList() {
-    return <Widget>[
-      UserAccountsDrawerHeader(
-        accountName: Text("User name"),
-        accountEmail: Text("email@email.com"),
-        currentAccountPicture: CircleAvatar(
-          backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
-              ? Colors.blue
-              : Colors.white,
-          child: Text(
-            "A",
-            style: TextStyle(fontSize: 40.0),
-          ),
-        ),
-      ),
-      // DrawerHeader(
-      //   child: Text('Drawer Header'),
-      //   decoration: BoxDecoration(
-      //     color: Colors.blue,
-      //   ),
-      // ),
-      ListTile(
-        title: Text('책장 모아보기'),
-        onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
-          // Navigator.of(context).push(MaterialPageRoute(
-          //     builder: (BuildContext context) => CalendarPage("Page two")));
-        },
-      ),
-      ListTile(
-        title: Text('책장 추가'),
-        onTap: () async {
-          final String newShelf = await _asyncInputDialog(context);
-          print("New shelf name is $newShelf");
-          _addShelf(newShelf);
-        },
-      ),
-      Container(
-        decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-        // color: Colors.blue,
-        child: MediaQuery.removePadding(
-          context: context,
-          removeTop: true,
-          child: ListView.builder(
-            // padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return Container(
-                  // decoration: BoxDecoration(border: Border.all()),
-                  // color: Colors.blue,
-                  child: listItem(index));
-            },
-            itemCount: myShelves.length,
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-          ),
-        ),
-      ),
-      ListTile(
-        title: Text('달력'),
-        onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => CalendarPage("독서 캘린더")));
-        },
-      ),
-      ListTile(
-        title: Text('설정'),
-        onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
-        },
-      ),
-    ];
   }
 
   Widget listItem(int index) {
