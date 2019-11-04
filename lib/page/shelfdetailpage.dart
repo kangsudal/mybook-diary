@@ -38,21 +38,20 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
     // UI를 그리기 위해 Todo를 사용합니다.
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.bookShelfName),
+        title: Text("${widget.bookShelfName}/$_bookCounter"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_bookCounter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child: 
+            GridView.builder(
+              shrinkWrap: true,
+              itemCount: _bookCounter,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3), 
+              itemBuilder: (BuildContext context, int index) {
+                return Container(padding: EdgeInsets.all(8),child: Placeholder());
+              },
+            )
+          
+        
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

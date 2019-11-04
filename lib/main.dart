@@ -29,6 +29,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<dynamic> myShelves = ['책장 모아 보기'];
+  int totalShelves = 1;
+  int currentShelf = 0;
+
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -36,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addShelf(String newShelf) {
     setState(() {
       myShelves.add(newShelf);
+      totalShelves = myShelves.length;
     });
   }
 
@@ -83,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageView.builder(
         controller: _pageController,
         itemBuilder: (BuildContext context, int position) {
-          int tempBook = position;
+          int tempBook = position*10;
           //tempBook 임시값 바꿔줘야함
           return ShelfDetailPage(
               myShelves[position], tempBook); //_pageBuilder();
@@ -132,26 +136,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 _addShelf(newShelf);
               },
             ),
-            Container(
-              decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-              // color: Colors.blue,
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: ListView.builder(
-                  // padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return Container(
-                        // decoration: BoxDecoration(border: Border.all()),
-                        // color: Colors.blue,
-                        child: listItem(index));
-                  },
-                  itemCount: myShelves.length,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                ),
+
+            //MyShelves
+            MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return listItem(index);
+                },
+                itemCount: myShelves.length,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
               ),
             ),
+            
             ListTile(
               title: Text('달력'),
               onTap: () {
