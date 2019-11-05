@@ -1,4 +1,4 @@
-package com.example.hope_your_real_victory
+package com.kangsudal.mybook-diary
 
 import android.os.Bundle
 

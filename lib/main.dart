@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hope_your_real_victory/page/shelfdetailpage.dart';
+import 'package:mybook-diary/page/shelfdetailpage.dart';
 
 import 'page/calendarpage.dart';
 
@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<dynamic> myShelves = ['책장 모아 보기'];
+  List<dynamic> myShelves = ['기본 책장'];
   int totalShelves = 1;
   int currentShelf = 0;
 
