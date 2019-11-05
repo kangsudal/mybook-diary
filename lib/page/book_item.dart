@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class BookItem extends StatelessWidget {
 
-  // final String bookName;
+  final String bookName='book name';
   // final int bookNum;
 
   // const BookItem({Key key, this.bookName, this.bookNum}) : super(key: key);
@@ -15,7 +15,12 @@ class BookItem extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: 
-            image
+            Column(
+              children: <Widget>[
+                Flexible(child: image),
+                Text('$bookName')
+              ],
+            )
         
     );
   }

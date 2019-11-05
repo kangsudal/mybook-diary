@@ -53,11 +53,16 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
           )
         ],
       ),
-      body: 
-        Center(
-          child: Container(
-            padding: EdgeInsets.only(top:10),
-            color: Colors.deepPurple[300],
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: new BoxDecoration(
+              color: Colors.deepPurple[300],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            
             child: GridView.builder(
               shrinkWrap: true,
               itemCount: _bookCounter,
@@ -66,8 +71,9 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
               itemBuilder: _buildItem,
             ),
           ),
-        )
-      ,
+        ],
+      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
