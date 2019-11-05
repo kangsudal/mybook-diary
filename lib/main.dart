@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mybook-diary/page/shelfdetailpage.dart';
+import 'package:mybook_diary/page/shelfdetailpage.dart';
 
 import 'page/calendarpage.dart';
 

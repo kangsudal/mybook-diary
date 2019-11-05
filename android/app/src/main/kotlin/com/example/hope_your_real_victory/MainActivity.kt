@@ -1,4 +1,4 @@
-package com.kangsudal.mybook-diary
+package com.kangsudal.mybook_diary
 
 import android.os.Bundle
 

@@ -39,6 +39,10 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${widget.bookShelfName}/$_bookCounter"),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.edit),color: Colors.white,),
+          IconButton(icon: Icon(Icons.delete_forever),color: Colors.white,)
+        ],
       ),
       body: Center(
         child: 
