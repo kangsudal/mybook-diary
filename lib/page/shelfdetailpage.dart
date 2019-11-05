@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mybook_diary/page/book_item.dart';
 // import 'package:kalendar/kalendar.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
@@ -6,7 +7,7 @@ class ShelfDetailPage extends StatefulWidget {
   final String bookShelfName;
   final int books;
 
-  ShelfDetailPage(this.bookShelfName,this.books);
+  ShelfDetailPage(this.bookShelfName, this.books);
 
   @override
   _ShelfDetailPageState createState() => _ShelfDetailPageState();
@@ -40,29 +41,42 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
       appBar: AppBar(
         title: Text("${widget.bookShelfName}/$_bookCounter"),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.edit),color: Colors.white,),
-          IconButton(icon: Icon(Icons.delete_forever),color: Colors.white,)
+          IconButton(
+            icon: Icon(Icons.edit),
+            color: Colors.white,
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.delete_forever),
+            color: Colors.white,
+            onPressed: () {},
+          )
         ],
       ),
-      body: Center(
-        child: 
-            GridView.builder(
+      body: 
+        Center(
+          child: Container(
+            padding: EdgeInsets.only(top:10),
+            color: Colors.deepPurple[300],
+            child: GridView.builder(
               shrinkWrap: true,
               itemCount: _bookCounter,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3), 
-              itemBuilder: (BuildContext context, int index) {
-                return Container(padding: EdgeInsets.all(8),child: Placeholder());
-              },
-            )
-          
-        
-      ),
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              itemBuilder: _buildItem,
+            ),
+          ),
+        )
+      ,
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-
     );
+  }
+
+  Widget _buildItem(BuildContext context, int index) {
+    return BookItem();
   }
 }
