@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageView.builder(
         controller: _pageController,
         itemBuilder: (BuildContext context, int position) {
-          int tempBook = position*10;
+          int tempBook = position * 10;
           //tempBook 임시값 바꿔줘야함
           return ShelfDetailPage(
               myShelves[position], tempBook); //_pageBuilder();
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 physics: ClampingScrollPhysics(),
               ),
             ),
-            
+
             ListTile(
               title: Text('달력'),
               onTap: () {

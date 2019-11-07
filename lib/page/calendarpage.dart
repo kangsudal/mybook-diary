@@ -40,23 +40,23 @@ class _CalendarPageState extends State<CalendarPage> {
             startingDayOfWeek: StartingDayOfWeek.saturday,
             // rowHeight: 100,
             builders: CalendarBuilders(
-              selectedDayBuilder: (context,date,events)=>
-              Container(
+              selectedDayBuilder: (context, date, events) => Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: NetworkImage('https://opgg-static.akamaized.net/images/lol/champion/Poppy.png?image=w_140&v=1'),fit: BoxFit.cover)
-                ),
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://opgg-static.akamaized.net/images/lol/champion/Poppy.png?image=w_140&v=1'),
+                        fit: BoxFit.cover)),
                 child: Column(
                   children: <Widget>[
-                    Text(date.day.toString(), style: TextStyle(color: Colors.white)),
+                    Text(date.day.toString(),
+                        style: TextStyle(color: Colors.white)),
                     // Image.network('https://opgg-static.akamaized.net/images/lol/champion/Poppy.png?image=w_140&v=1'),
                     // Image.network('https://opgg-static.akamaized.net/images/lol/champion/Jax.png?image=w_140&v=1'),
-
                   ],
                 ),
               ),
-              
             ),
           ),
           Text('data1'),
@@ -87,5 +87,3 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 }
-
-

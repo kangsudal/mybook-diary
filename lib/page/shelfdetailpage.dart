@@ -28,7 +28,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   void initState() {
     super.initState();
-    _list = ListModel<dynamic>(initItems: <dynamic>["가","나"]);
+    _list = ListModel<dynamic>(initItems: <dynamic>["가", "나"]);
     _bookCounter = _list.length;
   }
 
@@ -65,7 +65,6 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
           ),
           Container(
             padding: EdgeInsets.only(top: 10),
-            
             child: GridView.builder(
               shrinkWrap: true,
               itemCount: _bookCounter,
@@ -86,6 +85,8 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return BookItem(item: _list[index],);
+    return BookItem(
+      item: _list[index],
+    );
   }
 }
