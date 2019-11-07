@@ -16,20 +16,24 @@ class ShelfDetailPage extends StatefulWidget {
 
 class _ShelfDetailPageState extends State<ShelfDetailPage> {
   int _bookCounter = 0;
-  ListModel<dynamic> _list;
+  ListModel<dynamic> _bookList;
+  dynamic selectedItem;
 
-  void _incrementCounter() {
+  void _addBook() {
+    
+    dynamic element = "new book";
+    int index = selectedItem == null ? _bookList.length : _bookList.indexOf(selectedItem);
     setState(() {
-      _bookCounter++;
+      _bookList.insert(index, element);
     });
-    print(_bookCounter);
+    print(_bookList.length);
   }
 
   @override
   void initState() {
     super.initState();
-    _list = ListModel<dynamic>(initItems: <dynamic>["가", "나"]);
-    _bookCounter = _list.length;
+    _bookList = ListModel<dynamic>(initItems: <dynamic>["가", "나"]);
+    _bookCounter = _bookList.length;
   }
 
   @override
@@ -67,7 +71,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
             padding: EdgeInsets.only(top: 10),
             child: GridView.builder(
               shrinkWrap: true,
-              itemCount: _bookCounter,
+              itemCount: _bookList.length,
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
               itemBuilder: _buildItem,
@@ -77,7 +81,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _addBook,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -86,7 +90,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
 
   Widget _buildItem(BuildContext context, int index) {
     return BookItem(
-      item: _list[index],
+      item: _bookList[index],
     );
   }
 }
