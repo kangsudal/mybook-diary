@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class BookItem extends StatelessWidget {
 
-  final String bookName='book name';
-  // final int bookNum;
+  // final String bookName='book name';
+  final dynamic item;
 
-  // const BookItem({Key key, this.bookName, this.bookNum}) : super(key: key);
+  const BookItem({Key key, this.item}) : super(key: key);
 
 
   @override
@@ -18,7 +18,7 @@ class BookItem extends StatelessWidget {
             Column(
               children: <Widget>[
                 Flexible(child: image),
-                Text('$bookName')
+                Text('$item.name')
               ],
             )
         

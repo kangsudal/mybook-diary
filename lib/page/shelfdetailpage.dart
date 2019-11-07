@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mybook_diary/list_model.dart';
 import 'package:mybook_diary/page/book_item.dart';
 // import 'package:kalendar/kalendar.dart';
 // import 'package:table_calendar/table_calendar.dart';
@@ -15,6 +16,7 @@ class ShelfDetailPage extends StatefulWidget {
 
 class _ShelfDetailPageState extends State<ShelfDetailPage> {
   int _bookCounter = 0;
+  ListModel<dynamic> _list;
 
   void _incrementCounter() {
     setState(() {
@@ -26,7 +28,8 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   void initState() {
     super.initState();
-    _bookCounter = widget.books;
+    _list = ListModel<dynamic>(initItems: <dynamic>["가","나"]);
+    _bookCounter = _list.length;
   }
 
   @override
@@ -83,6 +86,6 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return BookItem();
+    return BookItem(item: _list[index],);
   }
 }
