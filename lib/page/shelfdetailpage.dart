@@ -19,14 +19,51 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   ListModel<dynamic> _bookList;
   dynamic selectedItem;
 
-  void _addBook() {
-    
-    dynamic element = "new book";
-    int index = selectedItem == null ? _bookList.length : _bookList.indexOf(selectedItem);
+  void _addBook() async {
+    dynamic newBook = await _asyncInputDialog(context);
+    print("New book name is $newBook");
+    int index = selectedItem == null
+        ? _bookList.length
+        : _bookList.indexOf(selectedItem);
     setState(() {
-      _bookList.insert(index, element);
+      _bookList.insert(index, newBook);
     });
     print(_bookList.length);
+  }
+
+  Future<String> _asyncInputDialog(BuildContext context) async {
+    String bookName = '';
+    return showDialog<String>(
+      context: context,
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('책 추가'),
+          content: new Row(
+            children: <Widget>[
+              new Expanded(
+                  child: new TextField(
+                autofocus: true,
+                decoration: new InputDecoration(
+                    labelText: '이름', hintText: 'eg. 나의 아름다운 정원'),
+                onChanged: (value) {
+                  bookName = value;
+                },
+              ))
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop(bookName);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
