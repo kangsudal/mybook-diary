@@ -22,13 +22,16 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   void _addBook() async {
     dynamic newBook = await _asyncInputDialog(context);
     print("New book name is $newBook");
-    int index = selectedItem == null
-        ? _bookList.length
-        : _bookList.indexOf(selectedItem);
-    setState(() {
-      _bookList.insert(index, newBook);
-    });
-    print(_bookList.length);
+    //dissmiss 처리
+    if (newBook != null && newBook != '') {
+      int index = selectedItem == null
+          ? _bookList.length
+          : _bookList.indexOf(selectedItem);
+      setState(() {
+        _bookList.insert(index, newBook);
+      });
+      print(_bookList.length);
+    }
   }
 
   Future<String> _asyncInputDialog(BuildContext context) async {
