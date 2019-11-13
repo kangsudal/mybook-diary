@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mybook_diary/book_model.dart';
 
 class BookItem extends StatelessWidget {
   // final String bookName='book name';
-  final dynamic item;
+  final BookModel item;
 
   const BookItem({Key key, this.item}) : super(key: key);
 
@@ -18,7 +19,7 @@ class BookItem extends StatelessWidget {
           onTap: (){print("상세보기페이지");},
           onLongPress: (){print("책 수정 방법을 선택해주세요.");},
           child: Column(
-            children: <Widget>[Flexible(child: image), Text('$item.name')],
+            children: <Widget>[Flexible(child: image), Text(item.title)],
           ),
         ));
   }

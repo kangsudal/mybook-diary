@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mybook_diary/book_model.dart';
 import 'package:mybook_diary/list_model.dart';
 import 'package:mybook_diary/page/book_item.dart';
 // import 'package:kalendar/kalendar.dart';
@@ -20,10 +21,11 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   dynamic selectedItem;
 
   void _addBook() async {
-    dynamic newBook = await _asyncInputDialog(context);
-    print("New book name is $newBook");
+    BookModel newBook = await _asyncInputDialog(context);
+    print("New book name is ${newBook.title}");
+    print("newBook: ${newBook.runtimeType}");
     //dissmiss 처리
-    if (newBook != null && newBook != '') {
+    if (newBook != null && newBook.title != '') {
       int index = selectedItem == null
           ? _bookList.length
           : _bookList.indexOf(selectedItem);
@@ -34,9 +36,9 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
     }
   }
 
-  Future<String> _asyncInputDialog(BuildContext context) async {
+  Future<BookModel> _asyncInputDialog(BuildContext context) async {
     String bookName = '';
-    return showDialog<String>(
+    return showDialog<BookModel>(
       context: context,
       barrierDismissible:
           false, // dialog is dismissible with a tap on the barrier
@@ -60,7 +62,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
-                Navigator.of(context).pop(bookName);
+                Navigator.of(context).pop(BookModel(title:bookName,author: '컨트롤즤'));
               },
             ),
           ],
@@ -72,7 +74,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   void initState() {
     super.initState();
-    _bookList = ListModel<dynamic>(initItems: <dynamic>["가", "나"]);
+    _bookList = ListModel<dynamic>(initItems: <dynamic>[BookModel(title:"가"), BookModel(title:"나"),]);
     _bookCounter = _bookList.length;
   }
 
