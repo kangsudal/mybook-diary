@@ -32,7 +32,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
       setState(() {
         _bookList.insert(index, newBook);
       });
-      print(_bookList.length);
+      print('책 개수: ${_bookList.length}');
     }
   }
 
@@ -62,7 +62,8 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
-                Navigator.of(context).pop(BookModel(title:bookName,author: '컨트롤즤'));
+                Navigator.of(context)
+                    .pop(BookModel(title: bookName, author: '컨트롤즤'));
               },
             ),
           ],
@@ -74,7 +75,10 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   void initState() {
     super.initState();
-    _bookList = ListModel<dynamic>(initItems: <dynamic>[BookModel(title:"가"), BookModel(title:"나"),]);
+    _bookList = ListModel<dynamic>(initItems: <dynamic>[
+      BookModel(title: "가"),
+      BookModel(title: "나"),
+    ]);
     _bookCounter = _bookList.length;
   }
 
@@ -131,8 +135,22 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return BookItem(
-      item: _bookList[index],
-    );
+    return GestureDetector(
+        onTap: () {
+          print("IDX:$index 책 상세보기페이지");
+        },
+        onLongPress: () {
+          print("IDX:$index 책 수정 방법을 선택해주세요.");
+          //TODO: Dialog 띄워서 edit/ remove 선택할수있게 하기
+          //객체 갖고와서 수정하기
+          //삭제하기
+          setState(() {
+            _bookList.removeAt(index);
+          });
+          print("삭제후 책 개수:${_bookList.length}");
+        },
+        child: BookItem(
+          item: _bookList[index],
+        ));
   }
 }

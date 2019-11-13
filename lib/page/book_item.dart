@@ -15,12 +15,9 @@ class BookItem extends StatelessWidget {
     );
     return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: (){print("상세보기페이지");},
-          onLongPress: (){print("책 수정 방법을 선택해주세요.");},
           child: Column(
             children: <Widget>[Flexible(child: image), Text(item.title)],
           ),
-        ));
+        );
   }
 }
