@@ -15,10 +15,116 @@ class ShelfDetailPage extends StatefulWidget {
   _ShelfDetailPageState createState() => _ShelfDetailPageState();
 }
 
+enum Answer { REMOVE, EDIT }
+
 class _ShelfDetailPageState extends State<ShelfDetailPage> {
   int _bookCounter = 0;
   ListModel<dynamic> _bookList;
   dynamic selectedItem;
+
+  void setBookList(ListModel value) {
+    setState(() {
+      _bookList = value;
+    });
+  }
+
+  Future<Null> _pick(int index) async {
+    switch (await showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text("책 수정 방법을 선택해주세요."),
+            children: <Widget>[
+              SimpleDialogOption(
+                child: Text("수정"),
+                onPressed: () {
+                  Navigator.pop(context, Answer.EDIT);
+                },
+              ),
+              SimpleDialogOption(
+                child: Text("삭제"),
+                onPressed: () {
+                  Navigator.pop(context, Answer.REMOVE);
+                },
+              )
+            ],
+          );
+        })) {
+      case Answer.EDIT:
+        //edit dialog
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("책 수정"),
+                content: Row(
+                  //TODO: 진짜 FORM만들기
+                  children: <Widget>[
+                    Flexible(
+                        child: Image(image: AssetImage("images/book.png"))),
+                    Column(
+                      children: <Widget>[
+                        Text("Form"),
+                        Text("제목:___________"),
+                        Text("저자:___________"),
+                        Text("총 페이지:______"),
+                        Text("책장:___________"),
+                        Text("상태:___________"),
+                      ],
+                    )
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('취소'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('저장하기'),
+                    onPressed: () {
+                      //TODO: 저장기능 붙이기
+                    },
+                  ),
+                ],
+              );
+            });
+        //update _bookList
+        print("수정하는작업");
+        break;
+      case Answer.REMOVE:
+        //check remove dialog
+        //update _bookList
+        print("삭제하는작업");
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("경고"),
+                content: Text("정말 삭제하시겠습니까?"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('아니오'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('예'),
+                    onPressed: () {
+                      setState(() {
+                        _bookList.removeAt(index);
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            });
+        break;
+    }
+  }
 
   void _addBook() async {
     BookModel newBook = await _asyncInputDialog(context);
@@ -142,12 +248,9 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
         onLongPress: () {
           print("IDX:$index 책 수정 방법을 선택해주세요.");
           //TODO: Dialog 띄워서 edit/ remove 선택할수있게 하기
+          _pick(index);
           //객체 갖고와서 수정하기
           //삭제하기
-          setState(() {
-            _bookList.removeAt(index);
-          });
-          print("삭제후 책 개수:${_bookList.length}");
         },
         child: BookItem(
           item: _bookList[index],
