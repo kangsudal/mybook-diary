@@ -58,20 +58,11 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
               return AlertDialog(
                 title: Text("책 수정"),
                 content: Row(
-                  //TODO: 진짜 FORM만들기
+                  //FORM
                   children: <Widget>[
                     Flexible(
                         child: Image(image: AssetImage("images/book.png"))),
-                    Column(
-                      children: <Widget>[
-                        Text("Form"),
-                        Text("제목:___________"),
-                        Text("저자:___________"),
-                        Text("총 페이지:______"),
-                        Text("책장:___________"),
-                        Text("상태:___________"),
-                      ],
-                    )
+                    new MyForm()
                   ],
                 ),
                 actions: <Widget>[
@@ -84,7 +75,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
                   FlatButton(
                     child: Text('저장하기'),
                     onPressed: () {
-                      //TODO: 저장기능 붙이기
+                      _onSubmit();
                     },
                   ),
                 ],
@@ -247,7 +238,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
         },
         onLongPress: () {
           print("IDX:$index 책 수정 방법을 선택해주세요.");
-          //TODO: Dialog 띄워서 edit/ remove 선택할수있게 하기
+          //Dialog 띄워서 edit/ remove 선택할수있게 하기
           _pick(index);
           //객체 갖고와서 수정하기
           //삭제하기
@@ -255,5 +246,70 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
         child: BookItem(
           item: _bookList[index],
         ));
+  }
+
+  void _onSubmit() {
+    //TextEditingController 알아보기
+    // if(formKey.currnetState.validate()){}
+    //TODO: 저장기능 붙이기
+  }
+}
+
+class MyForm extends StatefulWidget {
+  const MyForm({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _MyFormState createState() => _MyFormState();
+}
+
+class _MyFormState extends State<MyForm> {
+  final formKey = GlobalKey<FormState>();
+  final _book = BookModel();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Form(
+        key: formKey,
+        child: Container(
+          width: 100,
+          height: 300,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(hintText: "제목"),
+                validator: (value) {
+                  if (value.isEmpty) return "Please enter 제목";
+                },
+                onSaved: (input) => _book.title = input,
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: "저자"),
+                validator: (value) {
+                  if (value.isEmpty) return "Please enter 저자";
+                },
+                onSaved: (input) => _book.author = input,
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: "총 페이지"),
+                validator: (value) {
+                  if (value.isEmpty) return "Please enter 페이지";
+                },
+                onSaved: (input) => _book.totalPage = input as int,
+              ),
+              // CheckboxListTile(
+              //   title: const Text("책장"),
+              //   value: ,
+              //   onChanged: ,
+              // ),
+              // Text("상태:___________"),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
