@@ -55,31 +55,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
         showDialog(
             context: context,
             builder: (context) {
-              return AlertDialog(
-                title: Text("책 수정"),
-                content: Row(
-                  //FORM
-                  children: <Widget>[
-                    Flexible(
-                        child: Image(image: AssetImage("images/book.png"))),
-                    new MyForm()
-                  ],
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('취소'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('저장하기'),
-                    onPressed: () {
-                      _onSubmit();
-                    },
-                  ),
-                ],
-              );
+              return MyForm();
             });
         //update _bookList
         print("수정하는작업");
@@ -247,12 +223,6 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
           item: _bookList[index],
         ));
   }
-
-  void _onSubmit() {
-    //TextEditingController 알아보기
-    // if(formKey.currnetState.validate()){}
-    //TODO: 저장기능 붙이기
-  }
 }
 
 class MyForm extends StatefulWidget {
@@ -270,46 +240,78 @@ class _MyFormState extends State<MyForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Form(
-        key: formKey,
-        child: Container(
-          width: 100,
-          height: 300,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(hintText: "제목"),
-                validator: (value) {
-                  if (value.isEmpty) return "Please enter 제목";
-                },
-                onSaved: (input) => _book.title = input,
+    return AlertDialog(
+      title: Text("책 수정"),
+      content: Row(
+        //FORM
+        children: <Widget>[
+          Flexible(child: Image(image: AssetImage("images/book.png"))),
+          Form(
+            key: formKey,
+            child: Container(
+              width: 100,
+              height: 300,
+              child: ListView(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "제목"),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please enter 제목";
+                      return null;
+                    },
+                    onSaved: (input) => _book.title = input,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "저자"),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please enter 저자";
+                      return null;
+                    },
+                    onSaved: (input) => _book.author = input,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(hintText: "총 페이지"),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please enter 페이지";
+                      return null;
+                    },
+                    onSaved: (input) => _book.totalPage = input as int,
+                  ),
+                  // CheckboxListTile(
+                  //   title: const Text("책장"),
+                  //   value: ,
+                  //   onChanged: ,
+                  // ),
+                  // Text("상태:___________"),
+                ],
               ),
-              TextFormField(
-                decoration: InputDecoration(hintText: "저자"),
-                validator: (value) {
-                  if (value.isEmpty) return "Please enter 저자";
-                },
-                onSaved: (input) => _book.author = input,
-              ),
-              TextFormField(
-                decoration: InputDecoration(hintText: "총 페이지"),
-                validator: (value) {
-                  if (value.isEmpty) return "Please enter 페이지";
-                },
-                onSaved: (input) => _book.totalPage = input as int,
-              ),
-              // CheckboxListTile(
-              //   title: const Text("책장"),
-              //   value: ,
-              //   onChanged: ,
-              // ),
-              // Text("상태:___________"),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('취소'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        FlatButton(
+          child: Text('저장하기'),
+          onPressed: () {
+            _onSubmit();
+          },
+        ),
+      ],
     );
+  }
+
+  void _onSubmit() {
+    //TextEditingController 알아보기
+    if (formKey.currentState.validate()) {
+      //TODO: 저장기능 붙이기
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Processing Data')));
+    }
   }
 }
