@@ -20,7 +20,7 @@ enum Answer { REMOVE, EDIT }
 
 class _ShelfDetailPageState extends State<ShelfDetailPage> {
   int _bookCounter = 0;
-  ListModel<dynamic> _bookList;
+  ListModel<BookModel> _bookList;
   dynamic selectedItem;
 
   void setBookList(ListModel value) {
@@ -56,7 +56,8 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
         showDialog(
             context: context,
             builder: (context) {
-              return MyForm();
+              print("bookList[index]:${_bookList[index].title}");
+              return MyForm(editingBookModel:_bookList[index]);
             });
         //update _bookList
         print("수정하는작업");
@@ -149,7 +150,7 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
   @override
   void initState() {
     super.initState();
-    _bookList = ListModel<dynamic>(initItems: <dynamic>[
+    _bookList = ListModel<BookModel>(initItems: <BookModel>[
       BookModel(title: "가"),
       BookModel(title: "나"),
     ]);
@@ -227,7 +228,9 @@ class _ShelfDetailPageState extends State<ShelfDetailPage> {
 }
 
 class MyForm extends StatefulWidget {
+  final BookModel editingBookModel;
   const MyForm({
+    this.editingBookModel,
     Key key,
   }) : super(key: key);
 
@@ -238,6 +241,13 @@ class MyForm extends StatefulWidget {
 class _MyFormState extends State<MyForm> {
   final formKey = GlobalKey<FormState>();
   final _book = BookModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("does this work?${widget.editingBookModel.title}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -255,6 +265,7 @@ class _MyFormState extends State<MyForm> {
               child: ListView(
                 children: <Widget>[
                   TextFormField(
+                    initialValue: widget.editingBookModel.title!= null? widget.editingBookModel.title:"",
                     decoration: InputDecoration(hintText: "제목"),
                     validator: (value) {
                       if (value.isEmpty) return "Please enter 제목";
@@ -263,6 +274,7 @@ class _MyFormState extends State<MyForm> {
                     onSaved: (input) => _book.title = input,
                   ),
                   TextFormField(
+                    initialValue: widget.editingBookModel.author!= null? widget.editingBookModel.author:"",
                     decoration: InputDecoration(hintText: "저자"),
                     validator: (value) {
                       if (value.isEmpty) return "Please enter 저자";
@@ -271,6 +283,7 @@ class _MyFormState extends State<MyForm> {
                     onSaved: (input) => _book.author = input,
                   ),
                   TextFormField(
+                    initialValue: widget.editingBookModel.totalPage != null?widget.editingBookModel.totalPage.toString():'',
                     decoration: InputDecoration(hintText: "총 페이지"),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -317,6 +330,20 @@ class _MyFormState extends State<MyForm> {
       //TODO: 저장기능 붙이기
       formKey.currentState.save();
       book.save();
+      /*
+      TextEditingController
+      Provider
+      수정화면에 데이터 전달: https://flutter-ko.dev/docs/cookbook/navigation/passing-data
+
+      provider:
+      https://www.youtube.com/watch?v=YReqF6eM_dk
+      
+      controller:
+      https://stackoverflow.com/questions/52691887/flutter-initialvalue-null-controller-null-is-not-true-error?rq=1
+      https://flutter-ko.dev/docs/cookbook/forms/retrieve-input
+
+
+       */
     }
   }
 }
