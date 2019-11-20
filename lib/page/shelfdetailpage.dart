@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mybook_diary/book_model.dart';
 import 'package:mybook_diary/list_model.dart';
 import 'package:mybook_diary/page/book_item.dart';
@@ -271,11 +272,15 @@ class _MyFormState extends State<MyForm> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(hintText: "총 페이지"),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
                     validator: (value) {
                       if (value.isEmpty) return "Please enter 페이지";
                       return null;
                     },
-                    onSaved: (input) => _book.totalPage = input as int,
+                    onSaved: (input) => _book.totalPage = int.parse(input),
                   ),
                   // CheckboxListTile(
                   //   title: const Text("책장"),
@@ -299,19 +304,19 @@ class _MyFormState extends State<MyForm> {
         FlatButton(
           child: Text('저장하기'),
           onPressed: () {
-            _onSubmit();
+            _onSubmit(_book);
           },
         ),
       ],
     );
   }
 
-  void _onSubmit() {
+  void _onSubmit([BookModel book]) {
     //TextEditingController 알아보기
     if (formKey.currentState.validate()) {
       //TODO: 저장기능 붙이기
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text('Processing Data')));
+      formKey.currentState.save();
+      book.save();
     }
   }
 }
