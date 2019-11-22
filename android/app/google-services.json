@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324962234142",
+    "firebase_url": "https://my-book-diary.firebaseio.com",
+    "project_id": "my-book-diary",
+    "storage_bucket": "my-book-diary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324962234142:android:60c53c08f9bc187222e30f",
+        "android_client_info": {
+          "package_name": "com.kangsudal.mybook_diary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324962234142-me8c1qo1jsdshgbntm6hjbogm3ukrep4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3ZF69AZuBAzRxO4xdgU6llX3Z0qIqPIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324962234142-me8c1qo1jsdshgbntm6hjbogm3ukrep4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
